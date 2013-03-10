@@ -11,13 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130310140540) do
+ActiveRecord::Schema.define(:version => 20130310144934) do
 
   create_table "resume_sections", :force => true do |t|
     t.string   "title"
     t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "resume_id"
+  end
+
+  create_table "resumes", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "address"
+    t.string   "telephone"
+    t.string   "nationality"
+    t.string   "sex"
+    t.string   "status"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end

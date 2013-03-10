@@ -1,4 +1,7 @@
 class ResumeSectionsController < ApplicationController
+
+  before_filter :get_resume
+
   # GET /resume_sections
   # GET /resume_sections.json
   def index
@@ -40,11 +43,11 @@ class ResumeSectionsController < ApplicationController
   # POST /resume_sections
   # POST /resume_sections.json
   def create
-    @resume_section = ResumeSection.new(params[:resume_section])
+    @resume_section = @resume.resume_sections.build(params[:resume_section])
 
     respond_to do |format|
       if @resume_section.save
-        format.html { redirect_to @resume_section, notice: 'Resume section was successfully created.' }
+        format.html { redirect_to resume_section_path(@resume, @resume_section), notice: 'Resume section was successfully created.' }
         format.json { render json: @resume_section, status: :created, location: @resume_section }
       else
         format.html { render action: "new" }
@@ -80,4 +83,8 @@ class ResumeSectionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+    def get_resume
+      @resume = Resume.find(params[:resume_id])
+    end
 end
